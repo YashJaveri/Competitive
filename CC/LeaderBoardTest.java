@@ -1,4 +1,3 @@
-
 //https://www.hackerrank.com/challenges/climbing-the-leaderboard/problem
 import java.io.*;
 import java.util.*;
@@ -26,7 +25,7 @@ public class Solution {
                     for (int j = pos[i - 1]; j < scores.length; j++) {
                         System.out.println("Less: " + scores[j] + " , alice: " + alice[i]);
                         if (alice[i] >= scores[j]) {
-                            ans[i] = ranks[j];
+                            ans[i] = ranks[j];                            
                             break;
                         } else if (j == scores.length - 1)
                             ans[i] = ranks[scores.length - 1] + 1;
@@ -36,12 +35,14 @@ public class Solution {
                     for (int j = pos[i - 1]; j >= 0; j--) {
                         System.out.println("More: " + scores[j] + " , alice: " + alice[i]);
                         if (alice[i] < scores[j]) {
-                            ans[i] = ranks[j] + 1;
+                            ans[i] = ranks[j] + 1;                            
                             break;
-                        } else if (alice[i] == scores[j]) {
-                            ans[i] = ranks[j];
+                        }
+                        else if (alice[i] == scores[j]) { 
+                            ans[i] = ranks[j];                            
                             break;
-                        } else if (j == 0)
+                        }
+                        else if (j == 0)
                             ans[i] = 1;
                         pos[i] = j;
                     }
@@ -65,8 +66,7 @@ public class Solution {
     private static final Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) throws IOException {
-        // BufferedWriter bufferedWriter = new BufferedWriter(new
-        // FileWriter(System.getenv("OUTPUT_PATH")));
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
 
         int scoresCount = scanner.nextInt();
         scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
@@ -76,33 +76,37 @@ public class Solution {
         String[] scoresItems = scanner.nextLine().split(" ");
         scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
 
-        /// System.out.println("SCores COunt Actual: " + scoresItems.length);
-        for (int i = 0; i < scoresItems.length; i++) {
+        for (int i = 0; i < scoresCount; i++) {
             int scoresItem = Integer.parseInt(scoresItems[i]);
             scores[i] = scoresItem;
         }
-        /*
-         * for (int i = 0; i < scoresCount; i++) { System.out.println(scores[i]); }
-         */
+
         int aliceCount = scanner.nextInt();
         scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
 
         int[] alice = new int[aliceCount];
 
         String[] aliceItems = scanner.nextLine().split(" ");
+        scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
 
-        // System.out.println("AliceCount: " + aliceCount);
-        /*
-         * for (int i = 0; i < aliceCount; i++) { System.out.println(aliceItems[i]); }
-         */
-        for (int i = 0; i < aliceItems.length; i++) {
+        for (int i = 0; i < aliceCount; i++) {
             int aliceItem = Integer.parseInt(aliceItems[i]);
             alice[i] = aliceItem;
         }
 
         int[] result = climbingLeaderboard(scores, alice);
 
-        System.out.println(result);
+        for (int i = 0; i < result.length; i++) {
+            bufferedWriter.write(String.valueOf(result[i]));
+
+            if (i != result.length - 1) {
+                bufferedWriter.write("\n");
+            }
+        }
+
+        bufferedWriter.newLine();
+
+        bufferedWriter.close();
 
         scanner.close();
     }
