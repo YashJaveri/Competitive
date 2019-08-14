@@ -1,10 +1,8 @@
-
-//https://www.hackerrank.com/challenges/climbing-the-leaderboard/problem
 import java.io.*;
 import java.util.*;
 
-public class Solution {
-    // Complete the climbingLeaderboard function below.
+public class ClimbingLeaderboard {
+
     static int[] climbingLeaderboard(int[] scores, int[] alice) {
         int ans[] = new int[alice.length], ranks[] = new int[scores.length], pos[] = new int[scores.length];
         int num = scores[0], rank = 1;
@@ -24,7 +22,7 @@ public class Solution {
             if (i > 0) {
                 if (alice[i] <= scores[pos[i - 1]]) {
                     for (int j = pos[i - 1]; j < scores.length; j++) {
-                        System.out.println("Less: " + scores[j] + " , alice: " + alice[i]);
+                        //System.out.println("Less: " + scores[j] + " , alice: " + alice[i]);
                         if (alice[i] >= scores[j]) {
                             ans[i] = ranks[j];
                             break;
@@ -34,7 +32,7 @@ public class Solution {
                     }
                 } else if (alice[i] > scores[pos[i - 1]]) {
                     for (int j = pos[i - 1]; j >= 0; j--) {
-                        System.out.println("More: " + scores[j] + " , alice: " + alice[i]);
+                        //System.out.println("More: " + scores[j] + " , alice: " + alice[i]);
                         if (alice[i] < scores[j]) {
                             ans[i] = ranks[j] + 1;
                             break;
@@ -102,8 +100,10 @@ public class Solution {
 
         int[] result = climbingLeaderboard(scores, alice);
 
-        System.out.println(result);
+        for(int i=0; i<aliceCount; i++)
+            System.out.print(result[i] + " ");
 
         scanner.close();
     }
 }
+//https://www.hackerrank.com/challenges/climbing-the-leaderboard/problem
