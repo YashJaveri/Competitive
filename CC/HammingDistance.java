@@ -29,4 +29,4 @@ class Solution {
         return dist;
     }
 }
-//https://www.interviewbit.com/problems/largest-number/
+//https://www.interviewbit.com/problems/sum-of-pairwise-hamming-distance/
