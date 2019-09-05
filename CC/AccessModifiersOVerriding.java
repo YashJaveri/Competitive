@@ -8,7 +8,7 @@
  *  and only be hidden if we declare same message in Child class.
  * @author
  */
-public class AccessModifiersOVerriding{
+public class AccessModifiersOverriding{
  
     public static void main(String args[]) {
         //shows that private method can not be overridden in Java    
