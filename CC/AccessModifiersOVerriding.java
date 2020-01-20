@@ -24,9 +24,10 @@ class Parent{
         name();
         normal();
     }
+    private float x = 6.022E23;
  
     private void name(){
-        System.out.printf("private method inside Parent class in Java %n");
+        System.out.printf("private method inside Parent class in Java %n" + x);
     }
  
     public void normal(){

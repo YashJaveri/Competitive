@@ -1,21 +1,8 @@
-/**
- *
- * Java program to demonstrate that private method can not be overridden in Java.
- * This Java programs calls both private and non private method with child class
- * object on constructor of parent class.
- * Only non private method of Child class invoked while private method of
- * Parent class is invoked, Which confirms that private method can not be overridden in Java
- *  and only be hidden if we declare same message in Child class.
- * @author
- */
-public class AccessModifiersOVerriding{
- 
+public class AccessModifiersOverriding{
     public static void main(String args[]) {
         //shows that private method can not be overridden in Java    
         Parent parent = new Child();
     }
- 
- 
 }
 
 class Parent{
@@ -41,8 +28,9 @@ class Child extends Parent{
         name();
         normal();
     }
+    private double x= 6.022e23;
     private void name(){
-        System.out.printf("private method inside Child class in Java %n");
+        System.out.println(x);
     }
  
     @Override
