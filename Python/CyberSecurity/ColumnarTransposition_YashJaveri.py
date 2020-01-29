@@ -1,5 +1,5 @@
 import math
-#--------------------Columner Transposition Cipher--------------------
+#--------------------Columnar Transposition Cipher--------------------
 def m_split(t):
 	return [char for char in t]
 
