@@ -21,9 +21,8 @@ def frame_capture(name, count, path):
   
 if __name__ == '__main__':
 
-    arr_path = ["/Users/yashjaveri/Documents/Other/GRE/GRE Mogoosh/SC/Medium", "/Users/yashjaveri/Documents/Other/GRE/GRE Mogoosh/SC/Hard", "/Users/yashjaveri/Documents/Other/GRE/GRE Mogoosh/TC/Medium", 
-        "/Users/yashjaveri/Documents/Other/GRE/GRE Mogoosh/TC/Hard", "/Users/yashjaveri/Documents/Other/GRE/GRE Mogoosh/Quant (Math)/Quant/Hard", "/Users/yashjaveri/Documents/Other/GRE/GRE Mogoosh/Quant (Math)/Quant/Very Hard"]
-    name_arr = ["Verbal_SC_med",  "Verbal_SC_hard", "Verbal_TC_med", "Verbal_TC_hard", "Quant_Hard", "Quant_VeryHard"]
+    arr_path = ["/Users/yashjaveri/Documents/Other/GRE/GRE Mogoosh/SC/Medium", "/Users/yashjaveri/Documents/Other/GRE/GRE Mogoosh/SC/Hard", "/Users/yashjaveri/Documents/Other/GRE/GRE Mogoosh/TC/Medium", "/Users/yashjaveri/Documents/Other/GRE/GRE Mogoosh/TC/Hard", "/Users/yashjaveri/Documents/Other/GRE/GRE Mogoosh/Quant (Math)/Quant/Hard", "/Users/yashjaveri/Documents/Other/GRE/GRE Mogoosh/Quant (Math)/Quant/Very Hard"]
+    name_arr = ["Verbal_SC_med",  "Verbal_SC_hard", "Verbal_TC_med", "Verbal_TC_hard", "Quant_Hard",  "Quant_VeryHard"]    
     m_count = 0
     for a in arr_path:
         path = a
@@ -31,13 +30,19 @@ if __name__ == '__main__':
         m_count += 1
         save_path = "/Users/yashjaveri/Documents/CE/Python/" + name
         count = 0
-        os.mkdir(save_path)
-        for file in sorted(os.listdir(path)):
-            if file.endswith(".webm"):
-                count += 1
-                final_path=os.path.join(path, file)
-                frame_capture(name, str(count), final_path)
+        os.mkdir(save_path)        
+        arr = [(path + "/" + i) for i in os.listdir(path) if i.endswith(".webm")]
+        #arr.sort(key=lambda a: int(a[74:-5])) for quants very hard
+        #arr.sort(key=lambda a: int(a[79:-5])) for quants hard
+        arr.sort()        
+        for file in arr:            
+            #print("arr" + str(file))
+            count += 1
+            final_path=os.path.join(path, file)
+            frame_capture(name, str(count), final_path)
+
         with open(name + ".pdf", "wb") as f:
             a = [(save_path+"/"+i) for i in sorted(os.listdir(save_path + "/"), reverse=True) if i.endswith(".jpg")]
             a.sort()
+            #print(str(a))
             f.write(img2pdf.convert(a))                                                                
