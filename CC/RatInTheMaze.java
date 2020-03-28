@@ -8,13 +8,13 @@ class RatInTheMaze {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int limit = sc.nextInt();
-        int row9 = 0, col9 = 0;
+        //int row9 = 0, col9 = 0;
 
         for (int i = 0; i < limit; i++)
             for (int j = 0; j < limit; j++)
                 inp[i][j] = sc.nextInt();
 
-        System.out.println("Input: ");
+/*      System.out.println("Input: ");
         for (int i = 0; i < limit; i++) {
             for (int j = 0; j < limit; j++) {
                 System.out.print(inp[i][j] + " ");
@@ -24,9 +24,9 @@ class RatInTheMaze {
                 }
             }
             System.out.println();
-        }
+        } */
 
-        backTracker(row9, col9, limit);
+        backTracker(0, 0, limit);
         if(flag)
             System.out.println("Yes");
         else
@@ -38,18 +38,18 @@ class RatInTheMaze {
     private static void backTracker(int r, int c, int limit) {
         visited[r][c] = true;
 
-        if (r == 0 && c == 0) {
+        if (inp[r][c] == 9) {
             flag = true;
             return;
         }
         else if(!flag){
-            if(r+1<limit && !visited[r+1][c] && inp[r+1][c] == 1)
+            if((r+1<limit && !visited[r+1][c] && inp[r+1][c] == 1) || (r+1<limit && inp[r+1][c] == 9))
                 backTracker(r+1, c, limit);
-            if(c+1<limit && !visited[r][c+1] && inp[r][c+1] == 1)            
+            if((c+1<limit && !visited[r][c+1] && inp[r][c+1] == 1) || (c+1<limit && inp[r][c+1] == 9))
                 backTracker(r, c+1, limit);
-            if(c-1>=0 && !visited[r][c-1] && inp[r][c-1] == 1)
+            if((c-1>=0 && !visited[r][c-1] && inp[r][c-1] == 1) || (r-1>=0 && inp[r-1][c] == 9))
                 backTracker(r, c-1, limit);
-            if(r-1>=0 && !visited[r-1][c] && inp[r-1][c] == 1)
+            if((r-1>=0 && !visited[r-1][c] && inp[r-1][c] == 1) || (c-1>=0 && inp[r][c-1] == 9))
                 backTracker(r-1, c, limit);
         }
     }
