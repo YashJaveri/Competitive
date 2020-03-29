@@ -14,7 +14,7 @@ class RatInTheMaze {
             for (int j = 0; j < limit; j++)
                 inp[i][j] = sc.nextInt();
 
-/*      System.out.println("Input: ");
+      /*System.out.println("Input: ");
         for (int i = 0; i < limit; i++) {
             for (int j = 0; j < limit; j++) {
                 System.out.print(inp[i][j] + " ");
