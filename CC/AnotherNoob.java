@@ -5,27 +5,27 @@ Again, Noob being a noob needs to practice CP so he can only listen to songs for
 Again, Noob being a noob wants to play any song at most once also no two songs with the same genre should be played one after the other. 
 Again, Noob being a noob wants to know how many possible combinations exist such that each song is played at the most once and the sum of the duration of all the songs selected is exactly T.*/
 
+class Song{
+    private int dur = -1, genre = -1;
+
+    public Song(int dur, int genre){
+        this.dur = dur;
+        this.genre = genre;
+    }
+
+    public int getDur(){
+        return this.dur;
+    }
+
+    public int getGenre(){
+        return this.genre;
+    }        
+}
+
 public class AnotherNoob {
     static int N, totalTime;    
     static ArrayList<ArrayList<Song> > subSetOfSongs = new ArrayList<ArrayList<Song> >();
     static ArrayList<ArrayList<Integer> > genreCountSet = new ArrayList<ArrayList<Integer> >();
-
-    public class Song{
-        private int dur = -1, genre = -1;
-
-        public Song(int dur, int genre){
-            this.dur = dur;
-            this.genre = genre;
-        }
-
-        public int getDur(){
-            return this.dur;
-        }
-
-        public int getGenre(){
-            return this.genre;
-        }        
-    }
 
     private static void print(Object s){        
         System.out.println(s.toString());
