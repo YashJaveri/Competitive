@@ -21,7 +21,7 @@ class Countdown_Kickstart{
                 arr.add(x);            
             }
             int i=0;
-            while(i<=N-K){
+            while(i<N){
                 if(arr.get(i) == K)
                 {
                     i++;
@@ -38,7 +38,7 @@ class Countdown_Kickstart{
                 else
                     i++;
             }
-            System.out.println(finalCount);
+            System.out.println("Case  #" + (l+1) + ": " + finalCount);
             arr.clear();
             finalCount = 0; count = 0;                   
         }
