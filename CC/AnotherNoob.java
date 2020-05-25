@@ -19,7 +19,12 @@ class Song{
 
     public int getGenre(){
         return this.genre;
-    }        
+    }
+
+    @Override
+    public String toString() { 
+        return String.format("D: " + this.dur + " G: " + this.genre);
+    } 
 }
 
 public class AnotherNoob {
@@ -32,29 +37,34 @@ public class AnotherNoob {
     }
 
     static void subSet(List<Song> set, int setSize) 
-    {
+    {        
         long powSetSize = (long)Math.pow(2, setSize);
         int counter, j;
-
+        
         for(counter = 0; counter <  powSetSize; counter++) 
         {
             ArrayList<Song> subSongs = new ArrayList<Song>();
-            ArrayList<Integer> genreCount = new ArrayList<Integer>();
-            genreCount.set(1, 0); genreCount.set(2, 0); genreCount.set(3, 0);
+            ArrayList<Integer> genreCount = new ArrayList<Integer>(Collections.nCopies(3, 0));
+
             int totalDuration = 0;
+            //Subset using Bitmasking
             for(j = 0; j < setSize; j++) 
-            {                                                
+            {                
                 if((counter & (1 << j)) > 0) 
                 {
                     Song s = set.get(j);
                     subSongs.add(s);
                     totalDuration += s.getDur();
                     if(totalDuration>totalTime)
+                    {
+                        subSongs.clear();
                         break;
-                    //Gernre:
-                    genreCount.set(s.getGenre(), genreCount.get(s.getGenre())+1);
+                    }
+                    //Genre count:
+                    genreCount.set(s.getGenre()-1, genreCount.get(s.getGenre()-1)+1);
                 }
             }
+            //Only retain those with duratio = Total Time given in the question
             if(subSongs.size() != 0 && totalDuration == totalTime)
             {
                 subSetOfSongs.add(subSongs);
@@ -62,12 +72,34 @@ public class AnotherNoob {
                     genreCountSet.add(genreCount);
             }            
         }
-    } 
+    }
           
     static private void algo(List<Song> songs){
+        //Calculate subsets
         subSet(songs, N);
-        print(subSetOfSongs);
-        print(genreCountSet);
+        print(subSetOfSongs);//subSetOfSongs: Subset of songs with "D:" as duration and "G:" as genre
+        print(genreCountSet);//genreCountSet: Subset of genre counts (i.e. total number of each of the genres)
+
+        for(int i=0; i<genreCountSet.size(); i++){
+            //print(genreCountSet.get(i));
+            int sizeOfCurrSubSet = subSetOfSongs.get(i).size();
+            boolean isValid = true;
+            for(int j=0; j<3; j++){
+                //Check validity wether alternate diferent genres is possible or not
+                if((sizeOfCurrSubSet%2 == 0 && genreCountSet.get(i).get(j) > (sizeOfCurrSubSet/2)) 
+                    || (sizeOfCurrSubSet%2 != 0 && genreCountSet.get(i).get(j) > ((sizeOfCurrSubSet+1)/2)))
+                {
+                    isValid = false;
+                    break;
+                }                
+            }
+            if(isValid)
+            {                
+                //print("Valid ones: " + subSetOfSongs.get(i));
+                //Calculate permutations code:-
+
+            }
+        }
     }
 
     public static void main (String[] args) 
@@ -84,7 +116,7 @@ public class AnotherNoob {
             g = sc.nextInt();
             Song s = new Song(d, g);         
             songs.add(s);
-        }
+        }        
         algo(songs);
     }
 }
