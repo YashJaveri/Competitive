@@ -77,9 +77,11 @@ public class AnotherNoob {
     static private void algo(List<Song> songs){
         //Calculate subsets
         subSet(songs, N);
-        print(subSetOfSongs);//subSetOfSongs: Subset of songs with "D:" as duration and "G:" as genre
-        print(genreCountSet);//genreCountSet: Subset of genre counts (i.e. total number of each of the genres)
+        print("Subset with duration=total time: " + subSetOfSongs);//subSetOfSongs: Subset of songs with "D:" as duration and "G:" as genre
+        print("And their corresponding genre counts: " + genreCountSet);//genreCountSet: Subset of genre counts (i.e. total number of each of the genres)
+        long totalCombos = 0;
 
+        print("Valid ones after removing sets where alternate is not possible:");
         for(int i=0; i<genreCountSet.size(); i++){
             //print(genreCountSet.get(i));
             int sizeOfCurrSubSet = subSetOfSongs.get(i).size();
@@ -95,7 +97,7 @@ public class AnotherNoob {
             }
             if(isValid)
             {                
-                //print("Valid ones: " + subSetOfSongs.get(i));
+                print(subSetOfSongs.get(i));
                 //Calculate permutations code:-
 
             }
