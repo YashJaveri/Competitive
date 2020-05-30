@@ -75,10 +75,12 @@ public class AnotherNoob {
     }
           
     static private void algo(List<Song> songs){
-        //Calculate subsets
+        /*Calculate subsets*/
         subSet(songs, N);
-        print("Subset with duration=total time: " + subSetOfSongs);//subSetOfSongs: Subset of songs with "D:" as duration and "G:" as genre
-        print("And their corresponding genre counts: " + genreCountSet);//genreCountSet: Subset of genre counts (i.e. total number of each of the genres)
+        /*subSetOfSongs: Subset of songs with "D:" as duration and "G:" as genre*/
+        //print("Subset with duration=total time: " + subSetOfSongs);
+        /*genreCountSet: Subset of genre counts (i.e. total number of each of the genres)*/
+        //print("And their corresponding genre counts: " + genreCountSet);        
         long totalCombos = 0;
 
         print("Valid ones after removing sets where alternate is not possible:");
