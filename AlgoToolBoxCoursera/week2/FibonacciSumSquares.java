@@ -2,21 +2,26 @@ import java.util.*;
 
 public class FibonacciSumSquares {
     private static long getFibonacciSumSquaresNaive(long n) {
+        int arr[] = new int[60], sqrs[] = new int[60];
+        long period = 60;
+        long sumSqr = 1;
+
         if (n <= 1)
-            return n;
+            return (int)n;
 
-        long previous = 0;
-        long current  = 1;
-        long sum      = 1;
+        arr[0] = 0; arr[1] = 1; 
+        sqrs[0]=0; sqrs[1]=1;
 
-        for (long i = 0; i < n - 1; ++i) {
-            long tmp_previous = previous;
-            previous = current;
-            current = (tmp_previous + current)%10;
-            sum += Math.pow(current, 2);
-        }
-
-        return sum % 10;
+        for (int i = 0; i < 58; i++) {
+            arr[i+2] = (arr[i] + arr[i+1])%10;
+            sqrs[i+2] = arr[i+2]*arr[i+2];                    
+            sumSqr = (sumSqr + sqrs[i+2])%10;                        
+        }        
+            long finalSum = ((n/period)*sumSqr)%10;            
+            long remain = n%period;            
+            for(int i=0; i<=remain; i++)
+                finalSum = (finalSum + sqrs[i])%10;
+        return finalSum;
     }
     
     public static void main(String[] args) {

@@ -2,22 +2,34 @@ import java.util.*;
 
 public class CoveringSegments {
 
-    private static int[] optimalPoints(Segment[] segments) {
-        //write your code here
-        int[] points = new int[2 * segments.length];
-        for (int i = 0; i < segments.length; i++) {
-            points[2 * i] = segments[i].start;
-            points[2 * i + 1] = segments[i].end;
-        }
-        return points;
+    private static List<Integer> optimalPoints(Segment[] segments) {
+        Arrays.sort(segments);
+
+        List<Integer> points = new ArrayList<>();
+        int prev = segments[0].end;
+        points.add(prev);        
+
+    for (int i = 1; i < segments.length; i++) {
+      if(!(segments[i].end>=prev && segments[i].start<=prev)) {
+        prev = segments[i].end;        
+        points.add(prev);
+      }
+    }
+    return points;
     }
 
-    private static class Segment {
+    private static class Segment implements Comparable<Segment>{
         int start, end;
 
         Segment(int start, int end) {
             this.start = start;
             this.end = end;
+        }
+
+        public int compareTo(Segment s){
+            if(this.end > s.end) return 1;
+            else if(this.end < s.end) return -1;            
+            return 0;
         }
     }
     public static void main(String[] args) {
@@ -30,11 +42,12 @@ public class CoveringSegments {
             end = scanner.nextInt();
             segments[i] = new Segment(start, end);
         }
-        int[] points = optimalPoints(segments);
-        System.out.println(points.length);
-        for (int point : points) {
+        List<Integer> points = optimalPoints(segments);
+        System.out.println(points.size());
+        for (Integer point : points) {
             System.out.print(point + " ");
         }
+        scanner.close();
     }
 }
  

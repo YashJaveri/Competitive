@@ -18,10 +18,12 @@ public class FibonacciSumLastDigit {
             if(arr[i+1] == 0 && arr[i+2] == 1)
             {                         
                 period = i+1;
+                sum--;
                 if(sum<0) sum=m;
                 break;
             }
         }
+
             long finalSum = ((n/period)*sum)%m;
             long remain = n%period;
 
