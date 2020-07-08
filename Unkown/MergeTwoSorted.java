@@ -19,13 +19,18 @@ class MergeTwoSorted {
         while(i<m)
         {
             ans[k] = nums1[i];
+            i++;
             k++;
         }
         while(j<n)
         {
             ans[k] = nums2[j];
+            j++;
             k++;
         }
-        System.out.print(ans);
+        for(int l=0; l<k; l++){
+            nums1[l] = ans[l];
+        }
+        //System.out.print(ans);
     }
 }

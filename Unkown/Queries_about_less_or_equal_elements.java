@@ -20,12 +20,19 @@ public class Queries_about_less_or_equal_elements{
     }
 
     private static int binarySearch(int min, int max, long num){
-        int mid = (min + (max-min)/2);
+        int mid = (min + (max-min)/2);        
         //print(mid);
-        if(inp1.get(mid) == num)
-            return mid+1;
+        if(inp1.size() == 1)
+            return num>=inp1.get(mid)?1:0;
+        if(inp1.get(mid) == num){            
+            mid+=1;
+            while(mid<inp1.size() && inp1.get(mid)==num)
+                mid++;
+            return mid;
+
+        }
         else if(inp1.get(mid) < num && (mid+1) < inp1.size() && inp1.get(mid+1) > num)
-            return mid+1;        
+            return mid+1;
         else if(inp1.get(mid) > num){
             if(mid==1){
                 if (inp1.get(mid-1) > num)
