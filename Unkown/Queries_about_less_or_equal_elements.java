@@ -29,7 +29,6 @@ public class Queries_about_less_or_equal_elements{
             while(mid<inp1.size() && inp1.get(mid)==num)
                 mid++;
             return mid;
-
         }
         else if(inp1.get(mid) < num && (mid+1) < inp1.size() && inp1.get(mid+1) > num)
             return mid+1;

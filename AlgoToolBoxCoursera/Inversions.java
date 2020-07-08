@@ -1,6 +1,39 @@
 import java.util.*;
 
-public class Inversions {
+public class Inversions {    
+    static long merge(int a[], int temp[], int beg, int mid, int end) 
+    {  
+        int i=beg,j=mid+1,k,index = beg;
+        long invCount = 0;
+        
+        while(i<=mid && j<end)  
+        {  
+            if(a[i]<a[j])  
+                temp[index++] = a[i++];            
+            else
+            {
+                temp[index++] = a[j++];
+                invCount += (mid-i);
+            }            
+        }  
+        if(i>mid)  
+        {
+            while(j<end)
+                temp[index++] = a[j++];            
+        }  
+        else   
+        {  
+            while(i<=mid)              
+                temp[index++] = a[i++];
+        }  
+        k = beg;  
+        while(k<index)  
+        {  
+            a[k]=temp[k];  
+            k++;  
+        }
+        return invCount;
+    }
 
     private static long getNumberOfInversions(int[] a, int[] b, int left, int right) {
         long numberOfInversions = 0;
@@ -10,7 +43,7 @@ public class Inversions {
         int ave = (left + right) / 2;
         numberOfInversions += getNumberOfInversions(a, b, left, ave);
         numberOfInversions += getNumberOfInversions(a, b, ave, right);
-        //write your code here
+        numberOfInversions += merge(a, b, left, ave, right);
         return numberOfInversions;
     }
 
@@ -23,6 +56,7 @@ public class Inversions {
         }
         int[] b = new int[n];
         System.out.println(getNumberOfInversions(a, b, 0, a.length));
+        scanner.close();
     }
 }
 
