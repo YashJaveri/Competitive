@@ -3,34 +3,29 @@ import java.util.*;
 public class Inversions {    
     static long merge(int a[], int temp[], int beg, int mid, int end) 
     {  
-        int i=beg,j=mid+1,k,index = beg;
+        int i=beg,j=mid,k,index = beg;
         long invCount = 0;
         
-        while(i<=mid && j<end)  
+        while(i<mid && j<end)  
         {  
-            if(a[i]<a[j])  
+            if(a[i]<=a[j])  
                 temp[index++] = a[i++];            
             else
             {
                 temp[index++] = a[j++];
                 invCount += (mid-i);
             }            
-        }  
-        if(i>mid)  
-        {
-            while(j<end)
-                temp[index++] = a[j++];            
-        }  
-        else   
-        {  
-            while(i<=mid)              
+        }
+        while(j<end)
+                temp[index++] = a[j++];        
+        while(i<mid)
                 temp[index++] = a[i++];
-        }  
+
         k = beg;  
-        while(k<index)  
+        while(k<end)
         {  
             a[k]=temp[k];  
-            k++;  
+            k++;
         }
         return invCount;
     }
@@ -55,7 +50,7 @@ public class Inversions {
             a[i] = scanner.nextInt();
         }
         int[] b = new int[n];
-        System.out.println(getNumberOfInversions(a, b, 0, a.length));
+        System.out.println(getNumberOfInversions(a, b, 0, a.length-1));
         scanner.close();
     }
 }
