@@ -7,11 +7,12 @@ public class Inversions {
         long invCount = 0;
         
         while(i<mid && j<end)  
-        {  
-            if(a[i]<=a[j])  
-                temp[index++] = a[i++];            
+        {            
+            if(a[i]<=a[j]){ 
+                temp[index++] = a[i++];
+            }                
             else
-            {
+            {                
                 temp[index++] = a[j++];
                 invCount += (mid-i);
             }            
@@ -24,7 +25,7 @@ public class Inversions {
         k = beg;  
         while(k<end)
         {  
-            a[k]=temp[k];  
+            a[k]=temp[k];
             k++;
         }
         return invCount;
@@ -50,8 +51,7 @@ public class Inversions {
             a[i] = scanner.nextInt();
         }
         int[] b = new int[n];
-        System.out.println(getNumberOfInversions(a, b, 0, a.length-1));
+        System.out.println(getNumberOfInversions(a, b, 0, a.length));
         scanner.close();
     }
 }
-

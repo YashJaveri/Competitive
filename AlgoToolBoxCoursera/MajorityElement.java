@@ -7,7 +7,7 @@ public class MajorityElement {
   
         for(int i = 0; i < arr.length; i++) { 
             if (map.containsKey(arr[i])) { 
-                    int count = map.get(arr[i]) +1; 
+                    int count = map.get(arr[i]) + 1; 
                     if (count > arr.length/2)
                         return arr[i]; 
                     else

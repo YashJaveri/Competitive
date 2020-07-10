@@ -2,16 +2,65 @@ import java.io.*;
 import java.util.*;
 
 public class Sorting {
-    private static Random random = new Random();
+    private static Random random = new Random();    
 
-    private static int[] partition3(int[] a, int l, int r) {
-      //write your code here
+    private static int[] partition3(int[] a, int l, int r) {      
+        int m1 = l, m2 = r;
+        int i = l-1, j = r;
+        int p = l-1, q = r; 
+        int pivot = a[r], temp = 0;
 
+        while (true) 
+        { 
+            //Go on till element is less than pivot(left)
+            while (a[++i] < pivot); 
+            
+            //Go on till element is more than pivot(right)
+            while (pivot < a[--j])
+                if (j == l)
+                    break;
 
-      int m1 = l;
-      int m2 = r;
-      int[] m = {m1, m2};
-      return m;
+            // If i and j cross, then we are done
+            if (i >= j) break; 
+
+            // Swap if condition not satisfied
+            temp=a[i]; a[i]=a[j]; a[j]=temp;
+
+            //Swap if equal
+            if (a[i] == pivot)
+            { 
+                p++;//Last index of equals
+                temp=a[i]; a[i]=a[p]; a[p]=temp;
+            }
+
+            //Swap if equal
+            if (a[j] == pivot)
+            {
+                q--;//First index of equals
+                temp=a[j]; a[j]=a[q]; a[q]=temp;
+            }
+        } 
+
+        // Move pivot element to its correct index 
+        temp=a[i]; a[i]=a[r]; a[r]=temp;
+
+        // Move all left same occurrences from beginning to adjacent to arr[i] 
+        j = i-1; 
+        for (int k = l; k < p; k++){
+            temp=a[j]; a[j]=a[k]; a[k]=temp;
+            j--;
+        }
+
+        // Move all right same occurrences from end 
+        // to adjacent to arr[i] 
+        i = i+1; 
+        for (int k = r-1; k > q; k--){            
+            temp=a[i]; a[i]=a[k]; a[k]=temp;
+            i++;            
+        }
+        m1=j; m2=i;
+        int[] m = {m1, m2};
+        return m;
     }
 
     private static int partition2(int[] a, int l, int r) {
@@ -40,9 +89,9 @@ public class Sorting {
         a[l] = a[k];
         a[k] = t;
         //use partition3
-        int m = partition2(a, l, r);
-        randomizedQuickSort(a, l, m - 1);
-        randomizedQuickSort(a, m + 1, r);
+        int[] m = partition3(a, l, r);
+        randomizedQuickSort(a, l, m[0]);
+        randomizedQuickSort(a, m[1], r);
     }
 
     public static void main(String[] args) {
