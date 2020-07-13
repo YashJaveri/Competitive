@@ -35,7 +35,7 @@ public class PointsAndSegments {
         });
         int active = 0;
         for(Point p: listOfPoints){
-            //System.out.println("Val: " + p.x + " type: " + p.type);
+            System.out.println("Val: " + p.x + " type: " + p.type);
             if(p.type == 's')
                 active++;
             else if(p.type == 'e')
@@ -74,10 +74,9 @@ public class PointsAndSegments {
             points[i] = scanner.nextInt();
         }
         //use fastCountSegments
-        int[] cnt = fastCountSegments(starts, ends, points);
+        int[] cnt = naiveCountSegments(starts, ends, points);
         for (int x : cnt) {
             System.out.print(x + " ");
         }
     }
 }
-
