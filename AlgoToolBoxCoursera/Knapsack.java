@@ -31,4 +31,3 @@ public class Knapsack {
         System.out.println(optimalWeight(W, w));
     }
 }
-
